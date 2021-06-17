@@ -73,6 +73,8 @@ export default {
   mounted() {
     var c = document.getElementById("canvas");
     this.canvas = c.getContext('2d');
+    this.canvas.lineCap = 'round';
+    this.canvas.lineJoin= "round";
   },
 }
 </script>
