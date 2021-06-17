@@ -2,12 +2,12 @@
   <section>
     <h1>Drawing with mousemove event</h1>
     <h1>{{x}} , {{y}}</h1>
-    <canvas id="canvas" width="500" height="500" @mousedown="beginDrawing" @mouseup="stopDrawing" @mousemove="draw">
+    <canvas id="drawCanvas" width="500" height="500" @mousedown="beginDrawing" @mouseup="stopDrawing" @mousemove="draw">
     						Canvas not supported
     </canvas>
     <br>
     <button id="btnPrev" class="button" @click="prev">Undo</button>
-		<button id="btnClea" class="button" @click="init">Clear</button>
+		<button id="btnClea" class="button" @click="clear">Clear</button>
 		<button id="btnSave" class="button" @click="upload">Save</button>
   </section>
 </template>
@@ -63,15 +63,19 @@ export default {
     prev(){
       alert('prev');
     },
-    init(){
-      alert('init')
+    clear(){
+      let ctx = this.canvas;
+      ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+      ctx.beginPath();
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
     },
     upload() {
       alert('upload')
     }
   },
   mounted() {
-    var c = document.getElementById("canvas");
+    var c = document.getElementById("drawCanvas");
     this.canvas = c.getContext('2d');
     this.canvas.lineCap = 'round';
     this.canvas.lineJoin= "round";
@@ -80,7 +84,7 @@ export default {
 </script>
 
 <style scoped>
-  #canvas {
+  #drawCanvas {
     border:1px solid #000000;
   }
 </style>
